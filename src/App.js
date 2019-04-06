@@ -1,25 +1,45 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
+
+      state = {
+        countries: []
+      }
+
+
+
+      handleChange(e, index){
+        this.state.countries[index] = e.target.value
+        this.setState({
+          countries: this.state.countries
+        })
+      }
+
+      addCountry(){
+        this.setState({
+          countries: [...this.state.countries, '']
+        })
+      }
+
   render() {
+    console.log(this.state.countries)
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <h1> ThE FORM </h1>
+        <label> Adress </label>
+        { this.state.countries.map((country, index) => {
+            return(
+              <div key={index}>
+                  <input onChange={(e) => this.handleChange(e, index)} />
+              </div>
+            )
+        }) }
+        <hr />
+        <button onClick={(e) => this.addCountry(e)}> Add Country </button>
+        <hr />
+        <button> Submit </button>
+
       </div>
     );
   }
